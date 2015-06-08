@@ -1,8 +1,11 @@
 <h1>Listing Invoices</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
+	  <th>Title</th>
+	  <th>Client</th>
+	  <th>Date</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -10,9 +13,12 @@
   <tbody>
     <% @invoices.each do |invoice| %>
       <tr>
-        <td><%= link_to 'Show', invoice %></td>
-        <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>
-        <td><%= link_to 'Destroy', invoice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		<td><%= invoice[:title] %></td>
+		<td><%= invoice.user.try(:email) %></td>
+		<td><%= invoice[:due_date] %></td>
+        <td><%= link_to 'Show', invoice, class: "btn btn-default btn-xs" %></td>
+        <td><%= link_to 'Edit', edit_invoice_path(invoice), class: "btn btn-default btn-xs" %></td>
+        <td><%= link_to 'Destroy', invoice, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-xs" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -21,5 +27,5 @@
 <br>
 
 <% if current_user.admin? %>
-<%= link_to 'New Invoice', new_invoice_path %>
+<%= link_to 'New Invoice', new_invoice_path, class: "btn btn-primary" %>
 <% end %>
