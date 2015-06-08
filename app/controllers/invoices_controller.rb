@@ -1,15 +1,25 @@
 class InvoicesController < ApplicationController
+  before_action :confirm_admin, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
+  before_action :list_users, only: [:new, :edit]
+  before_action :authenticate_user!
 
   # GET /invoices
   # GET /invoices.json
   def index
-    @invoices = Invoice.all
+	  if current_user.admin?
+		  @invoices = Invoice.all
+	  else
+		  @invoices = Invoice.where user_id: current_user.id
+	  end
   end
 
   # GET /invoices/1
   # GET /invoices/1.json
   def show
+	  if current_user.admin? === false && current_user.id != @invoice.user_id
+		  render :unauthorized
+	  end
   end
 
   # GET /invoices/new
@@ -19,6 +29,9 @@ class InvoicesController < ApplicationController
 
   # GET /invoices/1/edit
   def edit
+  end
+
+  def unauthorized
   end
 
   # POST /invoices
@@ -69,6 +82,14 @@ class InvoicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def invoice_params
-      params[:invoice].permit(:title, :due_date, :charge_amount, :work_items)
-    end
+      params[:invoice].permit(:title, :due_date, :charge_amount, :work_items, :user_id)
+	end
+
+	def confirm_admin
+		render :unauthorized if current_user.admin? === false
+	end
+
+	def list_users
+		@users = User.where admin: false
+	end
 end

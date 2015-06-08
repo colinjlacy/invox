@@ -1,7 +1,7 @@
 <%= form_for(@invoice) do |f| %>
   <% if @invoice.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@invoice.errors.count, "error") %>
+    <div class="alert alert-danger">
+      <h2 class="text-danger"><%= pluralize(@invoice.errors.count, "error") %>
 		prohibited this invoice from being saved:</h2>
 
       <ul>
@@ -12,16 +12,35 @@
     </div>
   <% end %>
 
-	<%= f.label :title %><br/>
-	<%= f.text_field :title %><br/>
-	<%= f.label :due_date %><br/>
-	<%= f.text_field(:due_date, placeholder: 'mm/dd/yyy') %><br/>
-	<%= f.label :charge_amount %><br/>
-	<%= f.number_field :charge_amount %><br/>
-	<%= f.label :work_items %><br/>
-	<%= f.text_area :work_items %><br/>
+	<div class="form-group">
+	<%= f.label :title, class: "control-label" %>
+	<%= f.text_field :title, class: "form-control" %>
+	</div>
+
+	<div class="form-group">
+	<%= f.label :due_date, class: "control-label" %>
+	<%= f.text_field :due_date, placeholder: 'mm/dd/yyy', class: "form-control" %>
+	</div>
+
+	<div class="form-group">
+	<%= f.label :charge_amount, class: "control-label" %>
+	<%= f.number_field :charge_amount, class: "form-control" %>
+	</div>
+
+	<div class="form-group">
+	<%= f.label :work_items, class: "control-label" %>
+	<%= f.text_area :work_items, class: "form-control" %>
+	</div>
+
+	<div class="form-group">
+	<%= f.label :user_id, class: "control-label" %>
+	<%= f.select :user_id,
+		options_from_collection_for_select(@users, "id", "email", @invoice.user_id),
+		{include_blank: true},
+		{class: "form-control"} %>
+  	</div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: "btn btn-primary" %>
   </div>
 <% end %>

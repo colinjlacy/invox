@@ -11,5 +11,33 @@
  * file per style scope.
  *
  *= require_tree .
+ *= require bootstrap
+ *= require bootstrap-theme
  *= require_self
  */
+
+.app-header {
+    background-color: #626263;
+    padding: 5rem 0;
+    margin-bottom: 2rem;
+}
+.display-list .lead {
+    margin-bottom: 0;
+}
+.display-list .list-group-item {
+    padding: 20px;
+}
+h1, h2, h3 {
+    color: #777;
+}
+.field_with_errors {
+    background: none;
+    padding: 0;
+}
+.field_with_errors label {
+    color: #a94442;
+}
+.field_with_errors input,
+.field_with_errors select {
+    border-color: #a94442;
+}
