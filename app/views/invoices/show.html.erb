@@ -14,5 +14,6 @@
 
 <% if current_user.admin? %>
 <%= link_to 'Edit', edit_invoice_path(@invoice), class: "btn btn-default" %> |
+<%= link_to 'Send to Client', send_invoice_path(@invoice), method: "post", class: "btn btn-default" %> |
 <% end %>
 <%= link_to 'Back', invoices_path, class: "btn btn-default" %>

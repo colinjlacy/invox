@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 	devise_for :users
 	root 'invoices#index'
 	resources :invoices
+	post 'invoices/send/:id' => 'invoices#send_invoice', as: 'send_invoice'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
