@@ -31,7 +31,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 # Application gems:
-gem 'devise' 			 # handles client and admin accounts
+gem 'devise', '~> 3.5.1' 			 # handles client and admin accounts
 gem 'figaro'			 # creates app-wide env vars
 
 group :development, :test do
