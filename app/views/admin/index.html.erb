@@ -14,8 +14,9 @@
   <tr>
 	<td><%= u.email %></td>
 	<td><%= u.admin %></td>
-	<td><%= link_to "Edit", admin_edit_user_path(:id => u.id), class: "btn btn-sm btn-primary" %></td>
+	<td><%= link_to "View", admin_view_user_path(:id => u.id), class: "btn btn-sm btn-primary" %></td>
   </tr>
   <% end %>
   </tbody>
 </table>
+<%= link_to "Create new user", admin_new_user_path, class: "btn btn-primary" %>
