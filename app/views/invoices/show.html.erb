@@ -1,12 +1,17 @@
-
 <h2><%= @invoice.title %></h2>
+
 <hr/>
+
 <h3 class="text-muted">Client: <%= @invoice.user.try(:email) %></h3>
 <h4>Due: <%= @invoice.due_date %></h4>
+
 <hr/>
+
 <h4>Work Completed:</h4>
 <%= simple_format @invoice.work_items %>
+
 <hr/>
+
 <% if current_user.admin? %>
 <%= link_to 'Edit', edit_invoice_path(@invoice), class: "btn btn-default" %> |
 <% end %>

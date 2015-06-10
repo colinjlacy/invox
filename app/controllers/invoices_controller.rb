@@ -1,7 +1,6 @@
 class InvoicesController < ApplicationController
   before_action :confirm_admin, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
-  before_action :list_users, only: [:new, :edit]
   before_action :authenticate_user!
 
   # GET /invoices
@@ -87,9 +86,5 @@ class InvoicesController < ApplicationController
 
 	def confirm_admin
 		render :unauthorized if current_user.admin? === false
-	end
-
-	def list_users
-		@users = User.where admin: false
 	end
 end

@@ -35,7 +35,8 @@
 	<div class="form-group">
 	<%= f.label :user_id, class: "control-label" %>
 	<%= f.select :user_id,
-		options_from_collection_for_select(@users, "id", "email", @invoice.user_id),
+		options_from_collection_for_select(User.where(admin: false).collect,
+										   "id", "email", @invoice.user_id),
 		{include_blank: true},
 		{class: "form-control"} %>
   	</div>
