@@ -1,6 +1,6 @@
 class InvoicesController < ApplicationController
-  before_action :confirm_admin, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_invoice, only: [:show, :edit, :update, :destroy]
+  before_action :confirm_admin, only: [:new, :create, :edit, :update, :destroy, :send_invoice]
+  before_action :set_invoice, only: [:show, :edit, :update, :destroy, :send_invoice]
   before_action :list_users, only: [:new, :edit]
   before_action :authenticate_user!
 
@@ -32,6 +32,11 @@ class InvoicesController < ApplicationController
   end
 
   def unauthorized
+  end
+
+  def send_invoice
+	  InvoiceMailer.email_invoice(@invoice).deliver
+	  redirect_to :invoices, notice: "Your invoice has been sent!"
   end
 
   # POST /invoices
