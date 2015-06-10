@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
 
+  get 'admin/unauthorized'
+
+  get 'admin/new_user'
+
+  get 'admin/create'
+
+  get 'admin/' => 'admin#index'
+
+  get 'admin/user/:id' => 'admin#user', :as => 'admin_edit_user'
+
   devise_for :users
 	root 'invoices#index'
 	resources :invoices
